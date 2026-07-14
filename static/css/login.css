@@ -1,0 +1,74 @@
+.login-box{
+    width:380px;
+    margin:80px auto;
+    padding:35px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    box-shadow:0 0 35px rgba(0,0,0,.4);
+    text-align:center;
+}
+
+.login-box input{
+width:100%;
+padding:14px;
+margin:12px 0;
+border:none;
+outline:none;
+border-radius:10px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:16px;
+box-sizing:border-box;
+}
+
+.login-box input::placeholder{
+color:#BFC9D4;
+}
+
+.login-box input:focus{
+box-shadow:0 0 15px #06B6D4;
+}
+
+.login-box button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:50px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+background:
+linear-gradient(90deg,#8B5CF6,#06B6D4);
+color:white;
+transition:.4s;
+}
+
+.login-box button:hover{
+transform:translateY(-3px);
+box-shadow:0 0 25px #8B5CF6;
+}
+
+.login-box h1{
+    color:white;
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#BFC9D4;
+    font-size:16px;
+    margin-bottom:30px;
+}
+
+.login-box a{
+color:#06B6D4;
+text-decoration:none;
+font-weight:bold;
+}
+
+.login-box p{
+color:#BFC9D4;
+}

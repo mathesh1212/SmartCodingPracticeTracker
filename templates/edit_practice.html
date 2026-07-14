@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Practice</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_practice.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>Smart Coding Practice Tracker</h2>
+
+<ul>
+
+<li><a href="/dashboard">Dashboard</a></li>
+
+<li><a href="/logout">Logout</a></li>
+
+</ul>
+
+</nav>
+
+<div class="practice-box">
+
+<h1>Edit Practice</h1>
+
+<form method="POST">
+
+<select name="language" required>
+
+<option value="HTML" {% if practice[2]=="HTML" %}selected{% endif %}>HTML</option>
+
+<option value="CSS" {% if practice[2]=="CSS" %}selected{% endif %}>CSS</option>
+
+<option value="JavaScript" {% if practice[2]=="JavaScript" %}selected{% endif %}>JavaScript</option>
+
+<option value="Python" {% if practice[2]=="Python" %}selected{% endif %}>Python</option>
+
+<option value="Flask" {% if practice[2]=="Flask" %}selected{% endif %}>Flask</option>
+
+<option value="MySQL" {% if practice[2]=="MySQL" %}selected{% endif %}>MySQL</option>
+
+<option value="MongoDB" {% if practice[2]=="MongoDB" %}selected{% endif %}>MongoDB</option>
+
+</select>
+
+<input
+type="text"
+name="topic"
+value="{{ practice[3] }}"
+required>
+
+<select name="difficulty" required>
+
+<option value="Easy"
+{% if practice[4]=="Easy" %}selected{% endif %}>
+Easy
+</option>
+
+<option value="Medium"
+{% if practice[4]=="Medium" %}selected{% endif %}>
+Medium
+</option>
+
+<option value="Hard"
+{% if practice[4]=="Hard" %}selected{% endif %}>
+Hard
+</option>
+
+</select>
+
+<input
+type="number"
+name="duration"
+value="{{ practice[5] }}"
+required>
+
+<select name="status">
+
+<option value="Completed"
+{% if practice[6]=="Completed" %}selected{% endif %}>
+Completed
+</option>
+
+<option value="Pending"
+{% if practice[6]=="Pending" %}selected{% endif %}>
+Pending
+</option>
+
+</select>
+
+<textarea
+name="notes"
+rows="5">{{ practice[7] }}</textarea>
+
+<button type="submit">
+Update Practice
+</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

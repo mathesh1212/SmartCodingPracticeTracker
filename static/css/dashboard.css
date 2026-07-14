@@ -1,0 +1,176 @@
+.dashboard{
+    width:90%;
+    margin:40px auto;
+    text-align:center;
+}
+
+.dashboard h1{
+    color:white;
+    font-size:48px;
+    margin-bottom:10px;
+    text-shadow:0 0 20px rgba(139,92,246,.6);
+}
+
+.dashboard p{
+    color:#BFC9D4;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.card{
+width:240px;
+padding:30px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px rgba(6,182,212,.5);
+}
+
+.card h2{
+font-size:55px;
+margin-bottom:10px;
+}
+
+.card h3{
+color:white;
+margin:15px 0;
+font-size:24px;
+}
+
+.card p{
+    font-size:22px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.add-btn{
+display:inline-block;
+text-decoration:none;
+margin-top:40px;
+padding:15px 40px;
+border:none;
+border-radius:50px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+background:
+linear-gradient(90deg,#8B5CF6,#06B6D4);
+color:white;
+transition:.4s;
+}
+
+.add-btn:hover{
+transform:translateY(-5px);
+box-shadow:
+0 0 30px #8B5CF6;
+}
+
+.recent{
+width:70%;
+margin:50px auto;
+padding:30px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border-radius:20px;
+text-align:left;
+}
+.recent h2{
+color:white;
+margin-bottom:20px;
+}
+
+.recent ul{
+list-style:none;
+padding:0;
+}
+
+.recent li{
+padding:12px 0;
+color:#BFC9D4;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.history{
+
+width:90%;
+
+margin:60px auto;
+
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+padding:25px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.history h2{
+
+margin-bottom:20px;
+
+color:white;
+
+}
+
+.history table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.history th{
+
+background:#8B5CF6;
+
+padding:15px;
+
+color:white;
+
+}
+
+.history td{
+
+padding:15px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+color:#D6DCE5;
+
+}
+
+.history tr:hover{
+
+background:rgba(255,255,255,.05);
+
+}
+
+.history a{
+
+text-decoration:none;
+
+font-size:20px;
+
+margin:0 8px;
+}

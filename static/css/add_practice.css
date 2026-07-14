@@ -1,0 +1,88 @@
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#07111F,#0B172A,#07111F);
+    color:white;
+    min-height:100vh;
+}
+
+.practice-box{
+width:500px;
+margin:60px auto;
+padding:35px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border-radius:20px;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.practice-box h1{
+text-align:center;
+color:white;
+margin-bottom:25px;
+}
+
+.practice-box input,
+.practice-box select,
+.practice-box textarea{
+width:100%;
+padding:14px;
+margin:12px 0;
+background:rgba(255,255,255,.08);
+border:none;
+border-radius:10px;
+color:white;
+font-size:16px;
+box-sizing:border-box;
+outline:none;
+}
+
+.practice-box input::placeholder,
+.practice-box textarea::placeholder{
+color:#BFC9D4;
+}
+
+.practice-box select option{
+    background:#1E293B;
+    color:white;
+}
+
+.practice-box input:focus,
+.practice-box select:focus,
+.practice-box textarea:focus{
+box-shadow:0 0 15px #06B6D4;
+}
+
+.practice-box textarea{
+resize:none;
+}
+
+.practice-box button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:50px;
+font-size:18px;
+font-weight:bold;
+background:
+linear-gradient(90deg,#8B5CF6,#06B6D4);
+color:white;
+cursor:pointer;
+margin-top:15px;
+transition:0.4s ease;
+}
+
+.practice-box button:hover{
+    transform:translateY(-5px);
+    box-shadow:
+    0 0 20px rgba(139,92,246,.7),
+    0 0 40px rgba(6,182,212,.5);
+    transition:0.4s ease;
+}
+
+.practice-box button:active{
+
+    transform:scale(0.98);
+
+}
