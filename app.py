@@ -1,19 +1,21 @@
 from flask import Flask, render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
 app.secret_key="smartcodingtracker123"
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="smart_coding_tracker"
+conn = mysql.connector.connect(
+    host=os.getenv("MYSQLHOST", "localhost"),
+    user=os.getenv("MYSQLUSER", "root"),
+    password=os.getenv("MYSQLPASSWORD", ""),
+    database=os.getenv("MYSQLDATABASE", "smart_coding_tracker"),
+    port=int(os.getenv("MYSQLPORT", 3306))
 )
 
-cursor = db.cursor()
+cursor = conn.cursor()
 
 @app.route("/")
 def home():
@@ -164,7 +166,7 @@ def edit(id):
         )
 
         cursor.execute(sql, values)
-        db.commit()
+        conn.commit()
 
         return redirect("/dashboard")
     
@@ -202,7 +204,7 @@ def register():
         values = (fullname, email, username, password)
 
         cursor.execute(sql, values)
-        db.commit()
+        conn.commit()
 
         return redirect("/login")
     
@@ -239,7 +241,7 @@ def add_practice():
         )
 
         cursor.execute(sql, values)
-        db.commit()
+        conn.commit()
 
         return redirect("/dashboard")
 
