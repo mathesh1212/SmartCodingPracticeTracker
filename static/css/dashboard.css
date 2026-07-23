@@ -80,7 +80,7 @@ box-shadow:
 }
 
 .recent{
-width:70%;
+width:90%;
 margin:50px auto;
 padding:30px;
 background:rgba(255,255,255,.08);
@@ -173,4 +173,78 @@ text-decoration:none;
 font-size:20px;
 
 margin:0 8px;
+}
+
+.welcome-card{
+
+    width:100%;
+
+    background:#1f2937;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+
+}
+
+.welcome-card h1{
+
+    color:white;
+
+    font-size:36px;
+
+}
+
+.welcome-card p{
+
+    color:#b8c2d0;
+
+    margin-top:10px;
+
+    font-size:17px;
+
+}
+
+.progress-card{
+
+width:90%;
+
+margin:40px auto;
+
+background:#1f2937;
+
+padding:25px;
+
+border-radius:18px;
+
+}
+
+.progress{
+
+height:15px;
+
+background:#374151;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-top:15px;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+width:65%;
+
+background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+
+border-radius:20px;
+
 }

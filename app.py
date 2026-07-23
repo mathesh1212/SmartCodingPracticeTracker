@@ -8,11 +8,11 @@ app = Flask(__name__)
 app.secret_key="smartcodingtracker123"
 
 conn = mysql.connector.connect(
-    host=os.getenv("MYSQLHOST", "localhost"),
-    user=os.getenv("MYSQLUSER", "root"),
-    password=os.getenv("MYSQLPASSWORD", ""),
-    database=os.getenv("MYSQLDATABASE", "smart_coding_tracker"),
-    port=int(os.getenv("MYSQLPORT", 3306))
+    host="localhost",
+    user="root",
+    password="",
+    database="smart_coding_tracker",
+    port=3306
 )
 
 cursor = conn.cursor()
@@ -122,7 +122,7 @@ def delete(id):
     """
 
     cursor.execute(sql, (id, session["username"]))
-    db.commit()
+    conn.commit()
 
     return redirect("/dashboard")
 
@@ -188,26 +188,62 @@ def edit(id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    
+
     if request.method == "POST":
 
         fullname = request.form["fullname"]
         email = request.form["email"]
         username = request.form["username"]
-        password = generate_password_hash(request.form["password"])
+
+        password = request.form["password"]
+        confirm = request.form["confirm_password"]
+
+        # Password Match Check
+        if password != confirm:
+            return "Passwords do not match"
+
+        # Username Already Exists Check
+        cursor.execute(
+            "SELECT * FROM users WHERE username=%s",
+            (username,)
+        )
+
+        user = cursor.fetchone()
+
+        if user:
+            return "Username already exists"
+
+        # Email Already Exists Check
+        cursor.execute(
+            "SELECT * FROM users WHERE email=%s",
+            (email,)
+        )
+
+        email_exist = cursor.fetchone()
+
+        if email_exist:
+            return "Email already registered"
+
+        # Password Hash
+        password = generate_password_hash(password)
 
         sql = """
         INSERT INTO users(fullname, email, username, password)
         VALUES (%s, %s, %s, %s)
         """
 
-        values = (fullname, email, username, password)
+        values = (
+            fullname,
+            email,
+            username,
+            password
+        )
 
         cursor.execute(sql, values)
         conn.commit()
 
         return redirect("/login")
-    
+
     return render_template("register.html")
 
 @app.route("/add_practice", methods=["GET", "POST"])

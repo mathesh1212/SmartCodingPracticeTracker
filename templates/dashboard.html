@@ -2,7 +2,9 @@
 <html>
 
 <head>
+
 <meta charset="UTF-8">
+
 <title>Smart Coding Practice Tracker | Dashboard</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -26,50 +28,107 @@
 
 </nav>
 
+<!-- Welcome Section -->
+
 <div class="dashboard">
 
-<h1>👋Welcome {{ fullname }}!</h1>
- <p>
-    Welcome back! Keep practicing coding every day.
- </p>
+<div class="welcome-card">
 
-    <div class="cards">
+<h1>Welcome, {{ fullname }} 👋</h1>
 
-        <div class="card">
-            <h2>📚</h2>
-            <h3>Topics Completed</h3>
-            <p>{{ total_topics }}</p>
-        </div>
+<p>
+Keep practicing every day and improve your coding skills.
+</p>
 
-        <div class="card">
-            <h2>🔥</h2>
-            <h3>Current Streak</h3>
-            <p>{{ completed }}</p>
-        </div>
+</div>
 
-        <div class="card">
-            <h2>⏰</h2>
-            <h3>Practice Time</h3>
-            <p>{{ total_time }} Min</p>
-        </div>
+<!-- Dashboard Cards -->
 
-        <div class="card">
-            <h2>🎯</h2>
-            <h3>Goal</h3>
-            <p>{{ pending }}</p>
-        </div>
+<div class="cards">
 
-    </div>
+<div class="card">
 
-    <br>
+<h2>📚</h2>
 
-    <a href="/add_practice" class="add-btn">
-    + Add Practice
+<h3>Total Topics</h3>
+
+<p>{{ total_topics }}</p>
+
+</div>
+
+<div class="card">
+
+<h2>🔥</h2>
+
+<h3>Completed</h3>
+
+<p>{{ completed }}</p>
+
+</div>
+
+<div class="card">
+
+<h2>⏰</h2>
+
+<h3>Practice Time</h3>
+
+<p>{{ total_time }} Min</p>
+
+</div>
+
+<div class="card">
+
+<h2>🎯</h2>
+
+<h3>Pending</h3>
+
+<p>{{ pending }}</p>
+
+</div>
+
+</div>
+
+<!-- Progress -->
+
+<div class="progress-card">
+
+<h2>Learning Progress</h2>
+
+<div class="progress">
+
+<div class="progress-fill"></div>
+
+</div>
+
+</div>
+
+<!-- Add Practice Button -->
+
+<a href="/add_practice" class="add-btn">
+
++ Add Practice
+
 </a>
+
+<!-- Recent Activity -->
 
 <div class="recent">
 
 <h2>📌 Recent Activity</h2>
+
+<ul>
+
+<li>✔ HTML Forms Completed</li>
+
+<li>✔ CSS Flexbox Completed</li>
+
+<li>✔ Flask Login Completed</li>
+
+</ul>
+
+</div>
+
+<!-- Practice History -->
 
 <div class="history">
 
@@ -117,7 +176,9 @@
 
 <a href="/delete/{{ row[0] }}"
 onclick="return confirm('Are you sure you want to delete this practice?')">
+
 🗑️
+
 </a>
 
 </td>
@@ -130,16 +191,8 @@ onclick="return confirm('Are you sure you want to delete this practice?')">
 
 </div>
 
-<ul>
-
-<li>✔ HTML Forms Completed</li>
-<li>✔ CSS Flexbox Completed</li>
-<li>✔ Flask Login Completed</li>
-
-</ul>
-
 </div>
 
-</div>
 </body>
+
 </html>

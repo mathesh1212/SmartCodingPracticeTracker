@@ -1,0 +1,99 @@
+/* ===========================
+   Register Page
+=========================== */
+
+.register-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 20px;
+}
+
+.register-card{
+    width:100%;
+    max-width:450px;
+    background:#1b2433;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+/* Heading */
+
+.register-card h1{
+    color:white;
+    text-align:center;
+    margin-bottom:30px;
+    font-size:38px;
+}
+
+/* Form */
+
+.register-card form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+/* Inputs */
+
+.register-card input{
+
+width:100%;
+
+padding:15px;
+
+font-size:16px;
+
+border:none;
+
+border-radius:10px;
+
+background:#2b3648;
+
+color:white;
+
+outline:none;
+
+}
+
+/* Placeholder */
+
+.register-card input::placeholder{
+
+color:#bfc8d4;
+
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+
+    border:none;
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+
+    color:white;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(0,255,255,.35);
+
+}
