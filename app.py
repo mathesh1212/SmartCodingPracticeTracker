@@ -8,11 +8,11 @@ app = Flask(__name__)
 app.secret_key="smartcodingtracker123"
 
 conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="smart_coding_tracker",
-    port=3306
+    host=os.getenv("MYSQLHOST", "localhost"),
+    user=os.getenv("MYSQLUSER", "root"),
+    password=os.getenv("MYSQLPASSWORD", ""),
+    database=os.getenv("MYSQLDATABASE", "smart_coding_tracker"),
+    port=int(os.getenv("MYSQLPORT", 3306))
 )
 
 cursor = conn.cursor()
