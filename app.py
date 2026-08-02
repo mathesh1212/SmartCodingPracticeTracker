@@ -191,7 +191,7 @@ def edit_practice(id):
             session["username"]
         )
 
-        cursor.execute(sql, (id, session["username"]))
+        cursor.execute(sql, values)
         conn.commit()
 
         return redirect("/dashboard")
