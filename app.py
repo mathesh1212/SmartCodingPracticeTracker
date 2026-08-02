@@ -152,8 +152,8 @@ def delete(id):
 
     return redirect("/dashboard")
 
-@app.route("/edit/<int:id>", methods=["GET", "POST"])
-def edit(id):
+@app.route("/edit_practice/<int:id>", methods=["GET", "POST"])
+def edit_practice(id):
 
     if "username" not in session:
         return redirect("/login")
@@ -191,7 +191,7 @@ def edit(id):
             session["username"]
         )
 
-        cursor.execute(sql, values)
+        cursor.execute(sql, (id, session["username"]))
         conn.commit()
 
         return redirect("/dashboard")
@@ -206,6 +206,9 @@ def edit(id):
     cursor.execute(sql, (id, session["username"]))
 
     practice = cursor.fetchone()
+    
+    if practice is None:
+        return "Practice record not found", 404
 
     return render_template(
         "edit_practice.html",

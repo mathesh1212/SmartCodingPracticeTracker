@@ -1,0 +1,226 @@
+.practice-box{
+
+width:500px;
+
+max-width:95%;
+
+margin:50px auto;
+
+padding:35px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+.practice-box h1{
+
+color:white;
+
+text-align:center;
+
+margin-bottom:25px;
+
+font-size:32px;
+
+}
+
+.practice-box form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.practice-box input,
+.practice-box select,
+.practice-box textarea{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:rgba(255,255,255,.1);
+
+color:white;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+.practice-box textarea{
+
+resize:vertical;
+
+min-height:120px;
+
+}
+
+.practice-box input::placeholder,
+.practice-box textarea::placeholder{
+
+color:#cbd5e1;
+
+}
+
+.practice-box select option{
+
+color:black;
+
+}
+
+.practice-box button{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(90deg,#8B5CF6,#06B6D4);
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.practice-box button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 0 20px rgba(139,92,246,.5);
+
+}
+
+.cancel-btn{
+
+display:block;
+
+text-align:center;
+
+text-decoration:none;
+
+padding:15px;
+
+border-radius:12px;
+
+background:#374151;
+
+color:white;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.cancel-btn:hover{
+
+background:#4b5563;
+
+}
+
+@media(max-width:768px){
+
+.practice-box{
+
+width:95%;
+
+margin:20px auto;
+
+padding:20px;
+
+}
+
+.practice-box h1{
+
+font-size:26px;
+
+}
+
+.practice-box input,
+.practice-box select,
+.practice-box textarea{
+
+font-size:15px;
+
+padding:12px;
+
+}
+
+.practice-box button,
+.cancel-btn{
+
+width:100%;
+
+font-size:16px;
+
+padding:14px;
+
+}
+
+}@media(max-width:768px){
+
+.practice-box{
+
+width:95%;
+
+margin:20px auto;
+
+padding:20px;
+
+}
+
+.practice-box h1{
+
+font-size:26px;
+
+}
+
+.practice-box input,
+.practice-box select,
+.practice-box textarea{
+
+font-size:15px;
+
+padding:12px;
+
+}
+
+.practice-box button,
+.cancel-btn{
+
+width:100%;
+
+font-size:16px;
+
+padding:14px;
+
+}
+
+}

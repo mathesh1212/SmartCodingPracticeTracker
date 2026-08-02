@@ -7,8 +7,7 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/add_practice.css') }}">
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_practice.css') }}">
 </head>
 
 <body>
@@ -55,6 +54,7 @@
 type="text"
 name="topic"
 value="{{ practice[3] }}"
+placeholder="Enter Topic Name"
 required>
 
 <select name="difficulty" required>
@@ -80,6 +80,8 @@ Hard
 type="number"
 name="duration"
 value="{{ practice[5] }}"
+min="1"
+max="600"
 required>
 
 <select name="status">
@@ -98,11 +100,16 @@ Pending
 
 <textarea
 name="notes"
-rows="5">{{ practice[7] }}</textarea>
+rows="5"
+placeholder="Write your notes...">{{ practice[7] }}</textarea>
 
 <button type="submit">
 Update Practice
 </button>
+
+<a href="/dashboard" class="cancel-btn">
+    Cancel
+</a>
 
 </form>
 
