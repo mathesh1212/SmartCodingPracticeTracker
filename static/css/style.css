@@ -13,3 +13,55 @@ body{
     font-family:'Segoe UI',sans-serif;
     background:#081321;
 }
+
+.details-card{
+
+width:60%;
+margin:50px auto;
+padding:40px;
+
+background:#1d2735;
+
+border-radius:15px;
+
+color:white;
+
+box-shadow:0 0 20px rgba(0,0,0,.3);
+
+}
+
+.details-card h1{
+
+text-align:center;
+
+margin-bottom:30px;
+
+}
+
+.details-card p{
+
+font-size:18px;
+
+margin:15px 0;
+
+}
+
+.back-btn{
+
+display:inline-block;
+
+margin-top:30px;
+
+padding:12px 25px;
+
+background:linear-gradient(90deg,#7F5AF0,#00C6FF);
+
+color:white;
+
+text-decoration:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+}

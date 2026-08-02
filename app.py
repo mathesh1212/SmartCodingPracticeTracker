@@ -105,6 +105,32 @@ def dashboard():
         practice_list=practice_list
     )
     
+@app.route("/view_practice/<int:id>")
+def view_practice(id):
+
+    if "username" not in session:
+        return redirect("/login")
+
+    cursor.execute("""
+SELECT language,
+       topic,
+       difficulty,
+       duration,
+       status,
+       notes,
+       created_at
+FROM practice
+WHERE id=%s
+AND username=%s
+""", (id, session["username"]))
+
+    practice = cursor.fetchone()
+
+    return render_template(
+        "view_practice.html",
+        practice=practice
+    )
+    
 @app.route("/logout")
 def logout():
     session.clear()

@@ -159,27 +159,27 @@ Keep practicing every day and improve your coding skills.
 <tr>
 
 <td>{{ row[1] }}</td>
-
 <td>{{ row[2] }}</td>
-
 <td>{{ row[3] }}</td>
-
 <td>{{ row[4] }} Min</td>
-
 <td>{{ row[5] }}</td>
-
 <td>{{ row[6] }}</td>
 
-<td>
+<td class="action-buttons">
 
-<a href="/edit/{{ row[0] }}">✏️</a>
+    <a href="/view_practice/{{ row[0] }}" class="view-btn">
+        👁️
+    </a>
 
-<a href="/delete/{{ row[0] }}"
-onclick="return confirm('Are you sure you want to delete this practice?')">
+    <a href="/edit_practice/{{ row[0] }}" class="edit-btn">
+        ✏️
+    </a>
 
-🗑️
-
-</a>
+    <a href="/delete_practice/{{ row[0] }}"
+       onclick="return confirm('Delete this practice?')"
+       class="delete-btn">
+       🗑️
+    </a>
 
 </td>
 

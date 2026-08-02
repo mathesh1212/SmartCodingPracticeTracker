@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Practice Details</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="details-card">
+
+<h1>Practice Details</h1>
+
+<p><strong>Language :</strong> {{ practice[0] }}</p>
+
+<p><strong>Topic :</strong> {{ practice[1] }}</p>
+
+<p><strong>Difficulty :</strong> {{ practice[2] }}</p>
+
+<p><strong>Duration :</strong> {{ practice[3] }} Min</p>
+
+<p><strong>Status :</strong> {{ practice[4] }}</p>
+
+<p><strong>Notes :</strong></p>
+
+<p>{{ practice[5] }}</p>
+
+<p><strong>Date :</strong> {{ practice[6] }}</p>
+
+<a href="/dashboard" class="back-btn">
+⬅ Back to Dashboard
+</a>
+
+</div>
+
+</body>
+
+</html>
