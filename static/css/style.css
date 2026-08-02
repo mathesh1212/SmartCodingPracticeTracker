@@ -65,3 +65,21 @@ border-radius:10px;
 font-weight:bold;
 
 }
+
+.delete-btn{
+
+text-decoration:none;
+
+font-size:22px;
+
+margin-left:10px;
+
+transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+transform:scale(1.2);
+
+}

@@ -214,6 +214,23 @@ def edit_practice(id):
         "edit_practice.html",
         practice=practice
     )
+    
+@app.route("/delete_practice/<int:id>")
+def delete_practice(id):
+
+    if "username" not in session:
+        return redirect("/login")
+
+    sql = """
+    DELETE FROM practice
+    WHERE id=%s
+    AND username=%s
+    """
+
+    cursor.execute(sql, (id, session["username"]))
+    conn.commit()
+
+    return redirect("/dashboard")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
