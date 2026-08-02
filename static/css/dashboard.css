@@ -248,3 +248,33 @@ background:linear-gradient(90deg,#8b5cf6,#06b6d4);
 border-radius:20px;
 
 }
+
+.search-box{
+
+margin:30px auto;
+
+width:320px;
+
+max-width:95%;
+
+}
+
+.search-box input{
+
+width:100%;
+
+padding:14px;
+
+border-radius:10px;
+
+border:none;
+
+outline:none;
+
+font-size:16px;
+
+background:#263241;
+
+color:white;
+
+}
