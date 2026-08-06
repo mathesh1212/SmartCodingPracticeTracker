@@ -83,3 +83,27 @@ transition:.3s;
 transform:scale(1.2);
 
 }
+
+@media screen and (max-width:768px){
+
+body{
+
+overflow-x:hidden;
+
+}
+
+*{
+
+box-sizing:border-box;
+
+}
+
+img{
+
+max-width:100%;
+
+height:auto;
+
+}
+
+}

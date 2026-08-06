@@ -110,12 +110,33 @@ Keep practicing every day and improve your coding skills.
 
 </a>
 
-<div class="search-box">
+<div class="filter-container">
 
-<input
-type="text"
-id="searchInput"
-placeholder="🔍 Search Topic...">
+    <input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 Search Topic...">
+
+    <select id="languageFilter">
+
+        <option value="">All Languages</option>
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JavaScript</option>
+        <option>Python</option>
+        <option>Flask</option>
+        <option>MySQL</option>
+        <option>MongoDB</option>
+
+    </select>
+
+    <select id="statusFilter">
+
+        <option value="">All Status</option>
+        <option>Completed</option>
+        <option>Pending</option>
+
+    </select>
 
 </div>
 
@@ -201,32 +222,52 @@ onclick="return confirm('Are you sure?')">
 
 <script>
 
-const input = document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput");
+const languageFilter = document.getElementById("languageFilter");
+const statusFilter = document.getElementById("statusFilter");
 
-input.addEventListener("keyup", function () {
+function filterTable(){
 
-let filter = input.value.toLowerCase();
+    let search = searchInput.value.toLowerCase();
+    let language = languageFilter.value.toLowerCase();
+    let status = statusFilter.value.toLowerCase();
 
-let rows = document.querySelectorAll("#practiceTable tbody tr");
+    let rows = document.querySelectorAll("#practiceTable tbody tr");
 
-rows.forEach(function(row){
+    rows.forEach(function(row){
 
-let topic = row.cells[1].innerText.toLowerCase();
+        let topic = row.cells[1].innerText.toLowerCase();
+        let rowLanguage = row.cells[0].innerText.toLowerCase();
+        let rowStatus = row.cells[4].innerText.toLowerCase();
 
-if(topic.includes(filter)){
+        let matchSearch = topic.includes(search);
 
-row.style.display="";
+        let matchLanguage =
+            language === "" || rowLanguage === language;
+
+        let matchStatus =
+            status === "" || rowStatus === status;
+
+        if(matchSearch && matchLanguage && matchStatus){
+
+            row.style.display = "";
+
+        }
+        else{
+
+            row.style.display = "none";
+
+        }
+
+    });
 
 }
-else{
 
-row.style.display="none";
+searchInput.addEventListener("keyup", filterTable);
 
-}
+languageFilter.addEventListener("change", filterTable);
 
-});
-
-});
+statusFilter.addEventListener("change", filterTable);
 
 </script>
 

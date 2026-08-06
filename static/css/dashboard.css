@@ -278,3 +278,128 @@ background:#263241;
 color:white;
 
 }
+
+.filter-container{
+
+display:flex;
+gap:15px;
+justify-content:center;
+align-items:center;
+margin:30px 0;
+flex-wrap:wrap;
+
+}
+
+.filter-container input,
+.filter-container select{
+
+padding:12px 18px;
+border:none;
+border-radius:10px;
+font-size:16px;
+background:#1f2937;
+color:white;
+min-width:220px;
+
+}
+
+.filter-container input:focus,
+.filter-container select:focus{
+
+outline:none;
+box-shadow:0 0 10px #38bdf8;
+
+}
+
+/* ===========================
+   Mobile Responsive
+=========================== */
+
+@media screen and (max-width:768px){
+
+.dashboard{
+
+width:95%;
+margin:20px auto;
+
+}
+
+.welcome-card{
+
+padding:20px;
+
+}
+
+.welcome-card h1{
+
+font-size:28px;
+
+text-align:center;
+
+}
+
+.welcome-card p{
+
+text-align:center;
+
+font-size:15px;
+
+}
+
+.cards{
+
+flex-direction:column;
+align-items:center;
+gap:18px;
+
+}
+
+.card{
+
+width:100%;
+
+max-width:330px;
+
+}
+
+.add-btn{
+
+width:100%;
+text-align:center;
+font-size:18px;
+
+}
+
+.filter-container{
+
+flex-direction:column;
+width:100%;
+
+}
+
+.filter-container input,
+.filter-container select{
+
+width:100%;
+
+}
+
+.history{
+
+overflow-x:auto;
+
+}
+
+.history table{
+
+min-width:750px;
+
+}
+
+.recent{
+
+width:100%;
+
+}
+
+}

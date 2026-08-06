@@ -224,3 +224,24 @@ padding:14px;
 }
 
 }
+
+@media screen and (max-width:768px){
+
+.practice-box{
+
+width:95%;
+
+padding:20px;
+
+margin:20px auto;
+
+}
+
+.cancel-btn,
+.practice-box button{
+
+width:100%;
+
+}
+
+}

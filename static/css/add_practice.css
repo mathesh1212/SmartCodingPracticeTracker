@@ -86,3 +86,23 @@ transition:0.4s ease;
     transform:scale(0.98);
 
 }
+
+@media screen and (max-width:768px){
+
+.practice-box{
+
+width:95%;
+
+padding:20px;
+
+margin:20px auto;
+
+}
+
+.practice-box button{
+
+width:100%;
+
+}
+
+}

@@ -72,3 +72,29 @@ font-weight:bold;
 .login-box p{
 color:#BFC9D4;
 }
+
+@media screen and (max-width:768px){
+
+.login-box{
+
+width:95%;
+
+padding:25px;
+
+margin:30px auto;
+
+}
+
+.login-box input{
+
+font-size:16px;
+
+}
+
+.login-box button{
+
+width:100%;
+
+}
+
+}
