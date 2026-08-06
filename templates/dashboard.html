@@ -151,11 +151,13 @@ style="width: {{ progress }}%;">
 
 <ul>
 
-<li>✔ HTML Forms Completed</li>
+{% for item in recent_activity %}
 
-<li>✔ CSS Flexbox Completed</li>
+<li>
+✔ {{ item[0] }} - {{ item[1] }} ({{ item[2] }})
+</li>
 
-<li>✔ Flask Login Completed</li>
+{% endfor %}
 
 </ul>
 
@@ -196,7 +198,7 @@ style="width: {{ progress }}%;">
 <td>{{ row[3] }}</td>
 <td>{{ row[4] }} Min</td>
 <td>{{ row[5] }}</td>
-<td>{{ row[6] }}</td>
+<td>{{ row[6].strftime('%d-%m-%Y %I:%M %p') if row[6] else '-' }}</td>
 
 <td class="action-buttons">
 

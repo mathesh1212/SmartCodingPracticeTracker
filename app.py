@@ -99,6 +99,16 @@ def dashboard():
     """,(username,))
 
     practice_list = cursor.fetchall()
+    
+    cursor.execute("""
+    SELECT language, topic, status
+    FROM practice
+    WHERE username=%s
+    ORDER BY id DESC
+    LIMIT 5
+    """, (username,))
+
+    recent_activity = cursor.fetchall()
 
     return render_template(
         "dashboard.html",
@@ -108,7 +118,8 @@ def dashboard():
         completed=completed,
         pending=pending,
         practice_list=practice_list,
-        progress=progress
+        progress=progress,
+        recent_activity=recent_activity
     )
     
 @app.route("/view_practice/<int:id>")
