@@ -84,6 +84,11 @@ def dashboard():
     )
     pending = cursor.fetchone()[0]
     
+    if total_topics > 0:
+        progress = int((completed / total_topics) * 100)
+    else:
+        progress = 0
+    
     # Recent Practice History
     cursor.execute("""
     SELECT id, language, topic, difficulty,
@@ -102,7 +107,8 @@ def dashboard():
         total_time=total_time,
         completed=completed,
         pending=pending,
-        practice_list=practice_list
+        practice_list=practice_list,
+        progress=progress
     )
     
 @app.route("/view_practice/<int:id>")
@@ -112,7 +118,7 @@ def view_practice(id):
         return redirect("/login")
 
     cursor.execute("""
-SELECT language,
+       SELECT language,
        topic,
        difficulty,
        duration,

@@ -241,11 +241,11 @@ margin-top:15px;
 
 height:100%;
 
-width:65%;
-
-background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+background:linear-gradient(90deg,#8B5CF6,#06B6D4);
 
 border-radius:20px;
+
+transition:width .8s ease;
 
 }
 
