@@ -109,6 +109,22 @@ def dashboard():
     """, (username,))
 
     recent_activity = cursor.fetchall()
+    
+    cursor.execute("""
+    SELECT language, COUNT(*)
+    FROM practice
+    WHERE username=%s
+    GROUP BY language
+    """, (username,))
+    
+    labels = []
+    values = []
+
+    for row in language_data:
+        labels.append(row[0])
+        values.append(row[1])
+
+    language_data = cursor.fetchall()
 
     return render_template(
         "dashboard.html",
@@ -120,6 +136,8 @@ def dashboard():
         practice_list=practice_list,
         progress=progress,
         recent_activity=recent_activity
+        labels=labels,
+        values=values
     )
     
 @app.route("/view_practice/<int:id>")

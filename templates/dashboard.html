@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -163,6 +163,13 @@ style="width: {{ progress }}%;">
 
 </div>
 
+<div class="chart-card">
+
+<h2>📊 Practice Analytics</h2>
+
+<canvas id="languageChart"></canvas>
+
+</div>
 <!-- Practice History -->
 
 <div class="history">
@@ -273,6 +280,33 @@ searchInput.addEventListener("keyup", filterTable);
 languageFilter.addEventListener("change", filterTable);
 
 statusFilter.addEventListener("change", filterTable);
+
+</script>
+
+<script>
+
+const ctx =
+document.getElementById('languageChart');
+
+new Chart(ctx,{
+
+type:'bar',
+
+data:{
+
+labels: {{ labels|tojson }},
+
+datasets:[{
+
+label:"Practice Count",
+
+data: {{ values|tojson }}
+
+}]
+
+}
+
+});
 
 </script>
 
