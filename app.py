@@ -1,21 +1,39 @@
 from flask import Flask, render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
-import mysql.connector
+import sqlite3
 import os
 
 app = Flask(__name__)
 
 app.secret_key="smartcodingtracker123"
 
-conn = mysql.connector.connect(
-    host=os.getenv("MYSQL_HOST"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    database=os.getenv("MYSQL_DATABASE"),
-    port=int(os.getenv("MYSQL_PORT"))
-)
-
+conn = sqlite3.connect("database.db", check_same_thread=False)
 cursor = conn.cursor()
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS practice (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    language TEXT NOT NULL,
+    topic TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
+    duration INTEGER NOT NULL,
+    status TEXT NOT NULL,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+""")
+
+conn.commit()
 
 @app.route("/")
 def home():
@@ -29,7 +47,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         
-        sql = "SELECT * FROM users WHERE username=%s"
+        sql = "SELECT * FROM users WHERE username=?"
         
         cursor.execute(sql, (username,))
         
@@ -58,29 +76,30 @@ def dashboard():
 
     # Total Topics
     cursor.execute(
-        "SELECT COUNT(*) FROM practice WHERE username=%s",
-        (username,)
+    "SELECT COUNT(*) FROM practice WHERE username=?",
+    (username,)
     )
+
     total_topics = cursor.fetchone()[0]
 
     # Total Practice Time
     cursor.execute(
-        "SELECT IFNULL(SUM(duration),0) FROM practice WHERE username=%s",
-        (username,)
+    "SELECT IFNULL(SUM(duration),0) FROM practice WHERE username=?",
+    (username,)
     )
     total_time = cursor.fetchone()[0]
 
     # Completed Count
     cursor.execute(
-        "SELECT COUNT(*) FROM practice WHERE username=%s AND status='Completed'",
-        (username,)
+    "SELECT COUNT(*) FROM practice WHERE username=? AND status='Completed'",
+    (username,)
     )
     completed = cursor.fetchone()[0]
 
     # Pending Count
     cursor.execute(
-        "SELECT COUNT(*) FROM practice WHERE username=%s AND status='Pending'",
-        (username,)
+    "SELECT COUNT(*) FROM practice WHERE username=? AND status='Pending'",
+    (username,)
     )
     pending = cursor.fetchone()[0]
     
@@ -94,16 +113,16 @@ def dashboard():
     SELECT id, language, topic, difficulty,
     duration, status, created_at
     FROM practice
-    WHERE username=%s
+    WHERE username=?
     ORDER BY id DESC
-    """,(username,))
+    """, (username,))
 
     practice_list = cursor.fetchall()
     
     cursor.execute("""
     SELECT language, topic, status
     FROM practice
-    WHERE username=%s
+    WHERE username=?
     ORDER BY id DESC
     LIMIT 5
     """, (username,))
@@ -113,9 +132,11 @@ def dashboard():
     cursor.execute("""
     SELECT language, COUNT(*)
     FROM practice
-    WHERE username=%s
+    WHERE username=?
     GROUP BY language
     """, (username,))
+    
+    language_data = cursor.fetchall()
     
     labels = []
     values = []
@@ -123,8 +144,6 @@ def dashboard():
     for row in language_data:
         labels.append(row[0])
         values.append(row[1])
-
-    language_data = cursor.fetchall()
 
     return render_template(
         "dashboard.html",
@@ -135,7 +154,7 @@ def dashboard():
         pending=pending,
         practice_list=practice_list,
         progress=progress,
-        recent_activity=recent_activity
+        recent_activity=recent_activity,
         labels=labels,
         values=values
     )
@@ -147,19 +166,22 @@ def view_practice(id):
         return redirect("/login")
 
     cursor.execute("""
-       SELECT language,
-       topic,
-       difficulty,
-       duration,
-       status,
-       notes,
-       created_at
-FROM practice
-WHERE id=%s
-AND username=%s
-""", (id, session["username"]))
+        SELECT language,
+               topic,
+               difficulty,
+               duration,
+               status,
+               notes,
+               created_at
+        FROM practice
+        WHERE id=?
+        AND username=?
+    """, (id, session["username"]))
 
     practice = cursor.fetchone()
+
+    if practice is None:
+        return "Practice record not found", 404
 
     return render_template(
         "view_practice.html",
@@ -205,14 +227,14 @@ def edit_practice(id):
         sql = """
         UPDATE practice
         SET
-            language=%s,
-            topic=%s,
-            difficulty=%s,
-            duration=%s,
-            status=%s,
-            notes=%s
-        WHERE id=%s
-        AND username=%s
+            language=?,
+            topic=?,
+            difficulty=?,
+            duration=?,
+            status=?,
+            notes=?
+        WHERE id=?
+        AND username=?
         """
 
         values = (
@@ -230,18 +252,16 @@ def edit_practice(id):
         conn.commit()
 
         return redirect("/dashboard")
-    
-    sql = """
-    SELECT *
-    FROM practice
-    WHERE id=%s
-    AND username=%s
-    """
 
-    cursor.execute(sql, (id, session["username"]))
+    cursor.execute("""
+        SELECT *
+        FROM practice
+        WHERE id=?
+        AND username=?
+    """, (id, session["username"]))
 
     practice = cursor.fetchone()
-    
+
     if practice is None:
         return "Practice record not found", 404
 
@@ -258,8 +278,7 @@ def delete_practice(id):
 
     sql = """
     DELETE FROM practice
-    WHERE id=%s
-    AND username=%s
+    WHERE id=? AND username=?
     """
 
     cursor.execute(sql, (id, session["username"]))
@@ -279,13 +298,11 @@ def register():
         password = request.form["password"]
         confirm = request.form["confirm_password"]
 
-        # Password Match Check
         if password != confirm:
             return "Passwords do not match"
 
-        # Username Already Exists Check
         cursor.execute(
-            "SELECT * FROM users WHERE username=%s",
+            "SELECT * FROM users WHERE username=?",
             (username,)
         )
 
@@ -294,9 +311,8 @@ def register():
         if user:
             return "Username already exists"
 
-        # Email Already Exists Check
         cursor.execute(
-            "SELECT * FROM users WHERE email=%s",
+            "SELECT * FROM users WHERE email=?",
             (email,)
         )
 
@@ -305,12 +321,11 @@ def register():
         if email_exist:
             return "Email already registered"
 
-        # Password Hash
         password = generate_password_hash(password)
 
         sql = """
         INSERT INTO users(fullname, email, username, password)
-        VALUES (%s, %s, %s, %s)
+        VALUES (?, ?, ?, ?)
         """
 
         values = (
@@ -330,6 +345,9 @@ def register():
 @app.route("/add_practice", methods=["GET", "POST"])
 def add_practice():
 
+    if "username" not in session:
+        return redirect("/login")
+
     if request.method == "POST":
 
         language = request.form["language"]
@@ -344,7 +362,7 @@ def add_practice():
         sql = """
         INSERT INTO practice
         (username, language, topic, difficulty, duration, status, notes)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """
 
         values = (

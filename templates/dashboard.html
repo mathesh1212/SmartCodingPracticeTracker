@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -163,11 +163,15 @@ style="width: {{ progress }}%;">
 
 </div>
 
+<!-- Practice Analytics -->
+
 <div class="chart-card">
 
-<h2>📊 Practice Analytics</h2>
+    <h2>📊 Practice Analytics</h2>
 
-<canvas id="languageChart"></canvas>
+    <div class="chart-container">
+        <canvas id="languageChart"></canvas>
+    </div>
 
 </div>
 <!-- Practice History -->
@@ -205,7 +209,7 @@ style="width: {{ progress }}%;">
 <td>{{ row[3] }}</td>
 <td>{{ row[4] }} Min</td>
 <td>{{ row[5] }}</td>
-<td>{{ row[6].strftime('%d-%m-%Y %I:%M %p') if row[6] else '-' }}</td>
+<td>{{ row[6] }}</td>
 
 <td class="action-buttons">
 
@@ -283,30 +287,63 @@ statusFilter.addEventListener("change", filterTable);
 
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 
-const ctx =
-document.getElementById('languageChart');
+const canvas = document.getElementById("languageChart");
 
-new Chart(ctx,{
+if (canvas) {
 
-type:'bar',
+    const ctx = canvas.getContext("2d");
 
-data:{
+    new Chart(ctx, {
 
-labels: {{ labels|tojson }},
+        type: "bar",
 
-datasets:[{
+        data: {
 
-label:"Practice Count",
+            labels: {{ labels | tojson }},
 
-data: {{ values|tojson }}
+            datasets: [{
 
-}]
+                label: "Practice Count",
+
+                data: {{ values | tojson }},
+
+                borderWidth: 1
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        stepSize: 1
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
 
 }
-
-});
 
 </script>
 
